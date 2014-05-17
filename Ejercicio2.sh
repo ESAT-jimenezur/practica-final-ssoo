@@ -35,7 +35,7 @@ if [ "$respuesta" = "1" ]; then
 	echo "... buscando ..."
 	sleep 3
 	if [ `grep -c "$username_usuario" /etc/user_esat` -eq 1 ]; then
-		echo " *** Encontrado *** >"
+		echo " *** Encontrado *** "
 		#Usuario encontrado, ahora eliminamos su home y la linea de /etc/user_esat
 		#Eliminamos su directorio home (Si existe)
 		if [ -d "/home/$username_usuario" ]; then
