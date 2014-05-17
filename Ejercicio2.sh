@@ -33,16 +33,27 @@ if [ "$respuesta" = "1" ]; then
 	echo
 	echo "Usuario a eliminar -> " $username_usuario
 	echo "... buscando ..."
-	#sleep 3
+	sleep 3
 	if [ `grep -c "$username_usuario" /etc/user_esat` -eq 1 ]; then
-		echo "<¡-!- Encontrado -¡-!>"
+		echo " *** Encontrado *** >"
 		#Usuario encontrado, ahora eliminamos su home y la linea de /etc/user_esat
 		#Eliminamos su directorio home (Si existe)
+		if [ -d "/home/$username_usuario" ]; then
+			echo "--- Eliminando directorio home /home/$username_usuario"
+			sleep 1
+			`rm -r "/home/$username_usuario"`
+			echo "--- Eliminado ---"
+			sleep 1
+		fi
 
+		echo "--- Eliminando usuario de /etc/user_esat"
+		sleep 1
 		#Vamos a reescribir en un fichero auxiliar, y luego rehacer el inicial
 		`grep -v "$username_usuario" /etc/user_esat > /etc/user_esat_aux; mv /etc/user_esat_aux /etc/user_esat`
-
-		
+		echo "--- Eliminado ---"
+		sleep 1
+		echo " *** Saliendo *** "
+		exit
 		
 	else
 		echo " *** ¡ Usuario no encontrado ! *** "
