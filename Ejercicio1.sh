@@ -2,20 +2,31 @@
 
 # @name:	Ejercicio 1 Práctica final
 # @desc: 	Script para crear usuarios y grupos en unos ficheros determinados
+# @reqs:	Necesario tener './' añadido al PATH
 # @author: 	Jose Luis Jimenez Urbano <@iJos>
 # @date:	15/05/2014
 
 clear
 
+#Checkeamos si el user es root o no
+if [ "$(id -u)" != "0" ]; then
+	echo "Necesitas ejecutar el script como root..."
+	sleep 2
+	echo "...saliendo..."
+	sleep 2
+	exit
+fi
+
 #Creamos el fichero de usuarios
 if [ ! -f "/etc/user_esat" ]; then
 	echo "***** Configuración del script *****"
 	echo
-	read -rsp $"El directorio '/etc/user_esat' no existe, creando..."
-	echo 
-	sudo touch "/etc/user_esat"
+	echo "El directorio '/etc/user_esat' no existe, creando..."
+	sleep 3
+	touch "/etc/user_esat"
 	echo 	
-	read -rsp $"Creado con éxito"
+	echo "Creado con éxito"
+	sleep 3
 	clear
 fi
 
@@ -23,11 +34,12 @@ fi
 if [ ! -f "/etc/group_esat" ]; then
 	echo "***** Configuración del script *****"
 	echo
-	read -rsp $"El directorio '/etc/group_esat' no existe, creando..."
-	echo
+	echo "El directorio '/etc/group_esat' no existe, creando..."
+	sleep 3
 	sudo touch "/etc/group_esat"
 	echo
-	read -rsp $"Creado con éxito"
+	echo "Creado con éxito"
+	sleep 3
 	clear
 fi
 
@@ -38,7 +50,7 @@ echo "**********************************"
 echo "1.- Crear Usuario"
 echo "2.- Salir"
 
-read -rs respuesta
+read -r respuesta
 clear
 
 if [ "$respuesta" = "1" ]; then
@@ -58,7 +70,7 @@ if [ "$respuesta" = "1" ]; then
 		echo "Nombre:      $nombre_usuario"
 		echo "Apellidos:   $apellidos_usuario"
 		echo "GID usuario: $gid_usuario"
-		sudo mkdir "/home/$username_usuario"
+		mkdir "/home/$username_usuario"
 
 		#Introducimos el usuario en /etc/user_esat
 		echo "$username_usuario:x:$gid_usuario:$gid_usuario:$nombre_usuario:/home/$username_usuario:/bin/bash" >> /etc/user_esat
@@ -71,17 +83,19 @@ if [ "$respuesta" = "1" ]; then
 		echo "**********************************"
 		echo
 		
-		read -rsp $"...reiniciando..."
+		echo "...reiniciando..."
+		sleep 3
 		clear
-		ejer1.sh
+		Ejercicio1.sh #Si no esta añadido ./ al PATH, este comando y el de mas abajo fallaran
 	fi
 	
 elif [ "$respuesta" == "2" ]; then
-	read -rsp $"Saliendo..."
+	echo "Saliendo..."
+	sleep 2
 	clear
 	exit
 else
-	read -rsp $"Selecciona alguna opción del menú"
-	echo
-	ejer1.sh
+	echo "Selecciona alguna opción del menú"
+	sleep 2
+	Ejercicio1.sh
 fi
