@@ -47,7 +47,7 @@ fi
 echo "********** Ejercicio 1 ***********"
 echo "* Script de creación de Usuarios *"
 echo "**********************************"
-echo "1.- Crear Usuario"
+echo "1.- Crear usuario"
 echo "2.- Salir"
 
 read -r respuesta
