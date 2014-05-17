@@ -58,7 +58,8 @@ if [ "$respuesta" = "1" ]; then
 	read -p $"Username (minusculas)" username_usuario
 	read -p $"Nombre: " nombre_usuario
 	read -p $"Apellidos: " apellidos_usuario
-	read -p $"GID del usuario:" gid_usuario
+	read -p $"Información adicional: " info_usuario
+	read -p $"UID/GID del usuario:" gid_usuario
 	echo	
 
 #Creamos directorio home
@@ -69,11 +70,12 @@ if [ "$respuesta" = "1" ]; then
 		echo "**********************************"
 		echo "Nombre:      $nombre_usuario"
 		echo "Apellidos:   $apellidos_usuario"
+		echo "Información adicional: " $info_usuario
 		echo "GID usuario: $gid_usuario"
 		mkdir "/home/$username_usuario"
 
 		#Introducimos el usuario en /etc/user_esat
-		echo "$username_usuario:x:$gid_usuario:$gid_usuario:$nombre_usuario:/home/$username_usuario:/bin/bash" >> /etc/user_esat
+		echo "$username_usuario:x:$gid_usuario:$gid_usuario:$nombre_usuario $apellidos_usuario $info_usuario:/home/$username_usuario:/bin/bash" >> /etc/user_esat
 		echo "$username_usuario:x:$gid_usuario:" >> /etc/group_esat
 		echo "***** Introducido con éxito *****"
 
