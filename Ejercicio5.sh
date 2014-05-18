@@ -18,7 +18,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 user_actual="$HOME"
-#Creamos el fichero de usuarios
+#Creamos el fichero de screens
 if [ ! -d "$user_actual/screenshots/" ]; then
 	echo "***** Configuración del script *****"
 	echo
