@@ -50,6 +50,7 @@ if [ "$respuesta" = "1" ]; then
 			echo "... dando de alta al usuario $username_usuario en el grupo $grupo_usuario ..."
 		username_aux=`cat /etc/user_esat | grep "$username_usuario" | cut -d ":" -f1`
 		id_grupo=`cat /etc/group_esat | grep "$grupo_usuario" | cut -d ":" -f3`
+		echo $id_grupo
 
 			cat /etc/user_esat | sed -e "s/$username_usuario:x:[0-9]*:[0-9]*/$username_usuario:x:$id_grupo:$id_grupo/g" > /etc/user_esat_tmp
 			mv /etc/user_esat_tmp /etc/user_esat
